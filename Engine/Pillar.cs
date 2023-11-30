@@ -21,16 +21,14 @@ public class Pillar : MonoBehaviour
     /// This list should keep the screen proportions of the strip, always having even count.
     /// </summary>
     public List<float> stripProportions;
-    public int Appearances => stripProportions.Count / 2;
 
     //General properties specific to the Voybit Manuscript
     public bool active;
     public string content;
 
-    //Rendering
+    //Rendering and UI
     private SpriteRenderer _renderer;
     private List<TMP_Text> _displayTexts = new();
-    private float _heightProportion;
     private const string ARROW_STRING = " | \n | \n";
 
     private void Awake()
@@ -45,7 +43,6 @@ public class Pillar : MonoBehaviour
             GameObject pf = Instantiate(prefab, parent);
             _displayTexts.Add(pf.GetComponent<TMP_Text>());
         }
-        _heightProportion = GameManager.Instance.displayHeight;
     }
 
     public void ResetProportions()
@@ -77,7 +74,7 @@ public class Pillar : MonoBehaviour
             {
                 _displayTexts[i].text = ARROW_STRING + $" {content}  \n {Distance:F1} ";
                 float xProp = (stripProportions[2 * i] + stripProportions[2 * i + 1]) * 0.5f;
-                _displayTexts[i].rectTransform.anchoredPosition = new Vector2(width * (xProp - 0.5f), 0.5f);// height * (_heightProportion - 0.5f));
+                _displayTexts[i].rectTransform.anchoredPosition = new Vector2(width * (xProp - 0.5f), 0.5f);
             }
             else
             {

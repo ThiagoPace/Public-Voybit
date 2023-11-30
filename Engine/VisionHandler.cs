@@ -22,15 +22,16 @@ public class VisionHandler : MonoBehaviour
     private const int COL_SIZE = 50;
 
     /// <summary>
+    /// Array of colors in the order they appear, from left to right.
+    /// </summary>
+    private Color[] _colorsArray;
+
+    /// <summary>
     /// Array of strip proportions in the screen, from left to right. Values go from 0 to 1, and each strip is represented 
     /// as [start, end]. It has a fixed size of REL_DEL_SIZE, but the actually read region must have lenght 
     /// equal to two times the read region of _colorsArray.
     /// </summary>
     private float[] _relativeDelimitations;
-    /// <summary>
-    /// Array of colors in the order they appear, from left to right.
-    /// </summary>
-    private Color[] _colorsArray;
 
 
     private void Start()
@@ -49,7 +50,7 @@ public class VisionHandler : MonoBehaviour
     }
 
 
-    #region Pure engine methods
+    #region 1D visualization methods
 
     private void OnUpdateEvent(object sender, EventArgs e)
     {
@@ -213,7 +214,7 @@ public class VisionHandler : MonoBehaviour
 
     #endregion
 
-    #region Impure methods
+    #region Voybit methods
     /// <summary>
     /// This method returns a list of islands- i.e., consecutive active pillars. This is fundamental
     /// for the Voybit Manuscript, but not for a pure 1D engine implementation.
@@ -248,7 +249,7 @@ public class VisionHandler : MonoBehaviour
         for (int i = 0; i <= _rayAmount; i++)
         {
             Gizmos.DrawRay(_character.Position, GetRayDir(i) * 10f);
-            Gizmos.color = new Color(1, 1, 1, .2f);
+            Gizmos.color = new Color(1, 1, 1, .1f);
         }
     }
 }
